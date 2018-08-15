@@ -18,7 +18,6 @@ $ composer require alive2212/laravel-referral-service
 ``` bash
 php artisan vendor:publish --tag laravel-referral-service.config
 php artisan vendor:publish --tag laravel-referral-service.lang
-php artisan parsian_payment:init
 ```
 ## Usage
 
