@@ -17,6 +17,9 @@ class LaravelReferralServiceServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(resource_path('lang/vendor/alive2212'),
             'laravel-referral-service');
 
+        // migrations
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
         // routes
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
