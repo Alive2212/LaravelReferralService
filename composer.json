@@ -1,12 +1,12 @@
 {
-    "name": "alive2212/laravelreferralservice",
+    "name": "alive2212/laravel-referral-service",
     "description": ":description",
     "license": "license",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "Babak & Pooya DCH",
+            "email": "alive2212@yahoo.com",
+            "homepage": "http://babakn.com"
         }
     ],
     "homepage": "https://github.com/alive2212/laravelreferralservice",
