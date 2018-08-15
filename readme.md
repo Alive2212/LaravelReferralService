@@ -12,9 +12,14 @@ This is where your description should go. Take a look at [contributing.md](contr
 Via Composer
 
 ``` bash
-$ composer require alive2212/laravelreferralservice
+$ composer require alive2212/laravel-referral-service
 ```
 
+``` bash
+php artisan vendor:publish --tag laravel-referral-service.config
+php artisan vendor:publish --tag laravel-referral-service.lang
+php artisan parsian_payment:init
+```
 ## Usage
 
 ## Change log
