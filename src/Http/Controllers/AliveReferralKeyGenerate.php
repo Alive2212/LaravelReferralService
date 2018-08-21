@@ -2,6 +2,8 @@
 
 namespace Alive2212\LaravelReferralService\Http\Controllers;
 
+use Alive2212\LaravelSmartResponse\ResponseModel;
+use Alive2212\LaravelSmartResponse\SmartResponse\SmartResponse;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -29,7 +31,12 @@ class AliveReferralKeyGenerate extends Controller
         $serialized = serialize($forSerialize);
         $base64 = base64_encode($serialized);
         $url = URL::current().'?q='.urlencode($base64);
-        return $url;
+        $url = ['URL' => $url];
+        $response = new ResponseModel();
+        $response->setMessage('همه چی درسته');
+        $response->setStatus(true);
+        $response->setData(collect($url));
+        return SmartResponse::response($response);
 
     }
 
