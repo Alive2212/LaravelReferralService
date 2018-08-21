@@ -12,12 +12,7 @@ class PreRegisterController extends Controller
 
     public static function create()
     {
-        $preRegister =
-            ['user_id' => '123888',
-                'phone_number' => '3213123',
-                'country_code' => '123213321'];
-        $preRegister = PreRegister::firstOrCreate($preRegister);
-        return 0;
+
         $user_id = input::get('user_id');
         $phoneNumber = input::get('phone_number');
         $countryCode = input::get('country_code');

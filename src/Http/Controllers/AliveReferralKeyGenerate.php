@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 
 class AliveReferralKeyGenerate extends Controller
 {
@@ -22,6 +23,10 @@ class AliveReferralKeyGenerate extends Controller
     }
     public function generate()
     {
+        if (!is_null($referralCode = Input::get('q'))){
+            $refPerson = $this->finduser($referralCode);
+            return View::make('vendor.alive2212.referral', compact('refPerson'));
+        }
         $userid = Auth::user()->id;
         $user = User::find($userid);
         $countryCode = $user['country_code'];
@@ -43,6 +48,17 @@ class AliveReferralKeyGenerate extends Controller
     /**
      * @return string
      */
+    public function finduser($referralcode)
+    {
+        $urldecoded = urldecode($referralcode);
+        $base64decoded = base64_decode($urldecoded);
+        $deserialize = unserialize($base64decoded);
+        $phoneNumber = $deserialize[1];
+        $user = new User();
+        $user = $user->where('phone_number', '=', $phoneNumber)->get();
+        $userName = $user[0]['name'];
+        return $userName;
+    }
     public function getRouteAddress()
     {
         return $this->routeAddress;

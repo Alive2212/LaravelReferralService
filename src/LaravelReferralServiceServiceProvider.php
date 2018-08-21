@@ -38,6 +38,10 @@ class LaravelReferralServiceServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/lang/' => resource_path('lang/vendor/alive2212'),
             ], 'laravel-referral-service.lang');
+
+            $this->publishes([
+                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/alive2212'),
+            ], 'laravel-referral-service.views');
         }
     }
 
