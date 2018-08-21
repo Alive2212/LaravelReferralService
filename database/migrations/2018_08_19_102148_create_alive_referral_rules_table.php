@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAliveReferralRecordsTable extends Migration
+class CreateAliveReferralRulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateAliveReferralRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('alive_referral_records', function (Blueprint $table) {
+        Schema::create('alive_referral_rules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('processes_id');
+            $table->string('model')->nullable();
+            $table->string('method')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('rules')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateAliveReferralRecordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alive_referral_records');
+        Schema::dropIfExists('alive_referral_rules');
     }
 }
