@@ -28,9 +28,8 @@ class AliveReferralKeyGenerate extends Controller
         $forSerialize = [$countryCode, $phoneNumber];
         $serialized = serialize($forSerialize);
         $base64 = base64_encode($serialized);
-        $url = URL::current().'?q='.$base64;
-        $urlCode = urlencode($url);
-        return $urlCode;
+        $url = URL::current().'?q='.urlencode($base64);
+        return $url;
 
     }
 
