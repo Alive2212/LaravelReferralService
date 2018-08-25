@@ -36,7 +36,7 @@ class AliveReferralKeyGenerate extends Controller
         $serialized = serialize($forSerialize);
         $base64 = base64_encode($serialized);
         $url = URL::current().'?q='.urlencode($base64);
-        $url = ['URL' => $url];
+        $url = ['url' => $url];
         $response = new ResponseModel();
         $response->setMessage('همه چی درسته');
         $response->setStatus(true);
