@@ -6,7 +6,6 @@ use Alive2212\LaravelSmartResponse\ResponseModel;
 use Alive2212\LaravelSmartResponse\SmartResponse\SmartResponse;
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
@@ -14,8 +13,6 @@ use Illuminate\Support\Facades\View;
 
 class AliveReferralKeyGenerate extends Controller
 {
-    protected $routeAddress = '';
-
     public function __construct()
     {
         $this->middleware([
@@ -25,62 +22,37 @@ class AliveReferralKeyGenerate extends Controller
 
     public function userPage()
     {   $referralCode = Input::get('q');
-        $detail = $this->finduser($referralCode);
-        $refPerson = $detail['userName'];
-        $userId = $detail['userId'];
-//        dd($refPerson);
+        $detail = $this->findUser($referralCode);
+        $refPerson = $detail['user_name'];
+        $userId = $detail['user_id'];
         return View::make('vendor.alive2212.referral', compact(['refPerson', 'userId']));
     }
     public function generate()
     {
-        $userid = Auth::user()->id;
-        $user = User::find($userid);
-        $countryCode = $user['country_code'];
-        $countryCode = str_replace('+', '', $countryCode);
-        $phoneNumber = $user['phone_number'];
-        $forSerialize = [$countryCode, $phoneNumber];
-        $serialized = serialize($forSerialize);
-        $base64 = base64_encode($serialized);
-        $url = URL::current().'?q='.urlencode($base64);
-        $url = ['url' => $url];
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $countryCode = str_replace('+', '', $user['country_code']);
+        $forSerialize = [$countryCode, $user['phone_number']];
+        $url = ['url' => (URL::current() . '?q=' . urlencode(base64_encode(serialize($forSerialize))))];
         $response = new ResponseModel();
-        $response->setMessage('همه چی درسته');
+        $response->setMessage(config('laravel-referral-service.default_message'));
         $response->setStatus(true);
         $response->setData(collect($url));
         return SmartResponse::response($response);
     }
 
     /**
+     * @param $referralCode
      * @return string
      */
-    public function finduser($referralcode)
+    public function findUser($referralCode)
     {
-        $urldecoded = urldecode($referralcode);
-        $base64decoded = base64_decode($urldecoded);
-        $deserialize = unserialize($base64decoded);
+        $deserialize = unserialize(base64_decode(urldecode($referralCode)));
         $phoneNumber = $deserialize[1];
         $user = new User();
         $user = $user->where('phone_number', '=', $phoneNumber)->get();
-        $userId = $user[0]['id'];
-
-        $userName = $user[0]['name'];
-        $detail = [
-            'userName' => $userName,
-            'userId' => $userId,
-        ];
+        $detail = ['user_name' => $user[0]['name'], 'user_id' => $user[0]['id'],];
         return $detail;
     }
 
-    public function getRouteAddress()
-    {
-        return $this->routeAddress;
-    }
-
-    /**
-     * @param string $routeAddress
-     */
-    public function setRouteAddress($routeAddress)
-    {
-        $this->routeAddress = $routeAddress;
-    }
 }

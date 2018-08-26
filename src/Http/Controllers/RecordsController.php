@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class RecordsController extends Controller
 {
+
     public static function referralgift($details)
     {
         /**
