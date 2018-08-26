@@ -15,34 +15,37 @@ use Illuminate\Support\Facades\View;
 class AliveReferralKeyGenerate extends Controller
 {
     protected $routeAddress = '';
+
     public function __construct()
     {
         $this->middleware([
             'auth:api'
-        ]);
+        ])->except('userPage');
+    }
+
+    public function userPage()
+    {   $referralCode = Input::get('q');
+        $detail = $this->finduser($referralCode);
+        $refPerson = $detail['userName'];
+        $userId = $detail['userId'];
+//        dd($refPerson);
+        return View::make('vendor.alive2212.referral', compact(['refPerson', 'userId']));
     }
     public function generate()
     {
-        if (!is_null($referralCode = Input::get('q'))){
-            $refPerson = $this->finduser($referralCode);
-            return View::make('vendor.alive2212.referral', compact('refPerson'));
-        }
         $userid = Auth::user()->id;
         $user = User::find($userid);
         $countryCode = $user['country_code'];
         $countryCode = str_replace('+', '', $countryCode);
         $phoneNumber = $user['phone_number'];
         $forSerialize = [$countryCode, $phoneNumber];
-        $serialized = serialize($forSerialize);
-        $base64 = base64_encode($serialized);
-        $url = URL::current().'?q='.urlencode($base64);
-        $url = ['URL' => $url];
+        $url = URL::current() . '?q=' . urlencode(base64_encode(serialize($forSerialize)));
+        $url = ['url' => $url];
         $response = new ResponseModel();
         $response->setMessage('همه چی درسته');
         $response->setStatus(true);
         $response->setData(collect($url));
         return SmartResponse::response($response);
-
     }
 
     /**
@@ -56,9 +59,16 @@ class AliveReferralKeyGenerate extends Controller
         $phoneNumber = $deserialize[1];
         $user = new User();
         $user = $user->where('phone_number', '=', $phoneNumber)->get();
+        $userId = $user[0]['id'];
+
         $userName = $user[0]['name'];
-        return $userName;
+        $detail = [
+            'userName' => $userName,
+            'userId' => $userId,
+        ];
+        return $detail;
     }
+
     public function getRouteAddress()
     {
         return $this->routeAddress;

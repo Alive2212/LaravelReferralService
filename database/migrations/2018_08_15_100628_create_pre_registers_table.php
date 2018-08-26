@@ -16,7 +16,7 @@ class CreatePreRegistersTable extends Migration
         Schema::create('pre_registers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('phone_number');
+            $table->bigInteger('phone_number');
             $table->integer('country_code');
             $table->timestamps();
         });

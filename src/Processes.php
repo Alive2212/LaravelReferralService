@@ -16,9 +16,5 @@ class Processes extends Model
         'params' => 'array'
     ];
 
-    public function user()
-    {
-        return $this->belongsToMany(User::class);
-    }
 
 }
