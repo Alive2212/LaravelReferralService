@@ -27,6 +27,7 @@ class AliveReferralKeyGenerate extends Controller
         $userId = $detail['user_id'];
         return View::make('vendor.alive2212.referral', compact(['refPerson', 'userId']));
     }
+
     public function generate()
     {
         $userId = Auth::user()->id;

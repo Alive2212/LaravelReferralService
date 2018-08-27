@@ -42,6 +42,11 @@ class LaravelReferralServiceServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/views' => base_path('resources/views/vendor/alive2212'),
             ], 'laravel-referral-service.views');
+
+            $this->publishes([
+                __DIR__ . '/../public/css' => base_path('public/css'),
+            ], 'laravel-referral-service.css');
+
         }
     }
 
