@@ -15,7 +15,7 @@ class CreateAliveReferralRulesTable extends Migration
     {
         Schema::create('alive_referral_rules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('model')->nullable();
+            $table->string('class')->nullable();
             $table->string('method')->nullable();
             $table->string('user_id')->nullable();
             $table->string('rules')->nullable();
