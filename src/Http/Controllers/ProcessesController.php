@@ -9,9 +9,14 @@ class ProcessesController extends Controller
 {
     public function referral()
     {
-        $details = ['model' => 'call_user_func_array', 'method' => 'updating', 'user_id' => '3'];
-        $ddd = RecordsController::referralgift($details);
+        $details = ['model' => 'call_user_func_array', 'method' => 'updating', 'user_id' => '2'];
+        $referralGift = new RecordsController();
+        $ddd = $referralGift->referralGift($details);
         return $ddd;
     }
-    
+
+    public function test()
+    {
+        return 'pooya';
+    }
 }

@@ -25,7 +25,8 @@ class AliveReferralKeyGenerate extends Controller
         $detail = $this->findUser($referralCode);
         $refPerson = $detail['user_name'];
         $userId = $detail['user_id'];
-        return View::make('vendor.alive2212.referral', compact(['refPerson', 'userId']));
+        $config = config('laravel-referral-service.pre_register_api');
+        return View::make('vendor.alive2212.referral', compact(['refPerson', 'userId', 'config']));
     }
 
     public function generate()
@@ -52,7 +53,7 @@ class AliveReferralKeyGenerate extends Controller
         $phoneNumber = $deserialize[1];
         $user = new User();
         $user = $user->where('phone_number', '=', $phoneNumber)->get();
-        $detail = ['user_name' => $user[0]['name'], 'user_id' => $user[0]['id'],];
+        $detail = ['user_name' => $user[0]['name'], 'user_id' => $user[0]['id']];
         return $detail;
     }
 

@@ -6,6 +6,7 @@ use Alive2212\LaravelReferralService\PreRegister;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
 
 class PreRegisterController extends Controller
 {
@@ -17,6 +18,6 @@ class PreRegisterController extends Controller
                 'phone_number' => input::post('phone_number'),
                 'country_code' => input::post('country_code')];
         $preRegister = PreRegister::firstOrCreate($preRegister);
-        return $preRegister;
+        return View::make(config('laravel-referral-service.download_view'));
     }
 }

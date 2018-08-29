@@ -1,37 +1,37 @@
 @font-face {
     font-family: iransans;
     font-weight: 200;
-    src: url(iransans_ultralight.woff) format("woff")
+    src: url(../../resources/assets/font/iransans_ultralight.woff) format("woff")
 }
 
 @font-face {
     font-family: iransans;
     font-weight: 500;
-    src: url(iransans_medium.woff) format("woff")
+    src: url(../../resources/assets/font/iransans_medium.woff) format("woff")
 }
 
 @font-face {
     font-family: iransans;
     font-weight: 700;
-    src: url(iransans_bold.woff) format("woff")
+    src: url(../../resources/assets/font/iransans_bold.woff) format("woff")
 }
 
 @font-face {
-font-family: materialicons;
-font-weight: 400;
-src: url(MaterialIcons-Regular.ttf) format("truetype")
+    font-family: materialicons;
+    font-weight: 400;
+    src: url(../../resources/assets/font/MaterialIcons-Regular.ttf) format("truetype")
 }
 /**/
 @font-face {
-font-family: materialicons;
-font-weight: 400;
-src: url(MaterialIcons-Regular.woff) format("woff")
+    font-family: materialicons;
+    font-weight: 400;
+    src: url(../../resources/assets/font/MaterialIcons-Regular.woff) format("woff")
 }
 /**/
 @font-face {
-font-family: materialicons;
-font-weight: 400;
-src: url(MaterialIcons-Regular.woff2) format("woff2")
+    font-family: materialicons;
+    font-weight: 400;
+    src: url(../../resources/assets/font/MaterialIcons-Regular.woff2) format("woff2")
 }
 
 body {
@@ -65,6 +65,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, hr, iframe,
 }
 
 @media only screen and (max-width: 1000px){
+    .referral .col-flex, .referral .wrap-row {
+        -webkit-flex-basis: 100%!important;
+        -ms-flex-preferred-size: 100%!important;
+        flex-basis: 100%!important;
+        max-width: 100%!important;
+    }
+
     .referral .form {
         border: 0;
         text-align: center;
@@ -123,6 +130,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, hr, iframe,
     max-width: 100%
 }
 
+.col--small-6 {
+    width: 50%
+}
+
+.col--medium-4 {
+}
+.row .col-inner {
+    padding: 20px 5px
+}
+
 .referral {
     position: relative;
     min-height: 100vh;
@@ -131,9 +148,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, hr, iframe,
 }
 
 .referral, .referral .bespar-logo {
-     /* background-color: #fff; */
-     background-repeat: no-repeat;
- }
+    /* background-color: #fff; */
+    background-repeat: no-repeat;
+}
+
+.col--large, .col--medium, .col--small, [class^=col--small], [class^=col--medium], [class^=col--large] {
+    float: right
+}
 
 .container, .wrap {
     position: relative;
@@ -348,69 +369,69 @@ form {
 }
 
 ul {
-margin: 0 1rem 1rem;
-list-style-type: disc;
-list-style-position: inside;
+    margin: 0 1rem 1rem;
+    list-style-type: disc;
+    list-style-position: inside;
 }
 
 .referral .list li {
-list-style: none;
-font-size: .9em;
-color: #d9f3f5;
+    list-style: none;
+    font-size: .9em;
+    color: #d9f3f5;
 }
 ul li {
-margin-bottom: .5em;
+    margin-bottom: .5em;
 }
 
 body, html {
-min-height: 100%;
-max-width: 100%;
-overflow-x: hidden;
+    min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 .btn, .material-icons, b, body {
-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
 }
 body, html, legend, ul {
-padding: 0;
+    padding: 0;
 }
 body, figure {
-margin: 0;
+    margin: 0;
 }
 a, body {
-color: #333;
+    color: #333;
 }
 
 html {
--ms-text-size-adjust: 100%;
--webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 body, html {
-min-height: 100%;
-max-width: 100%;
-overflow-x: hidden;
+    min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 body, html, legend, ul {
-padding: 0;
+    padding: 0;
 }
 
 .referral .form button {
-position: relative;
-left: -20px;
-background-color: #45bc2f;
-border-radius: 30px;
-font-weight: 500;
-box-shadow: 0 0 0 2px #45bc2f;
-color: #fefefe;
+    position: relative;
+    left: -20px;
+    background-color: #45bc2f;
+    border-radius: 30px;
+    font-weight: 500;
+    box-shadow: 0 0 0 2px #45bc2f;
+    color: #fefefe;
 }
 
 
 @media only screen and (min-width: 1000px){
     .referral .form {
-    display: table;
-    margin: .5rem 0 5rem;
-    border: 2px solid #45bc2f;
-    border-radius: 10px;
-    direction: rtl;
+        display: table;
+        margin: .5rem 0 5rem;
+        border: 2px solid #45bc2f;
+        border-radius: 10px;
+        direction: rtl;
     }
 }
 

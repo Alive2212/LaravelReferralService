@@ -12,16 +12,24 @@ use Illuminate\Http\Request;
 class RecordsController extends Controller
 {
 
-    public static function referralgift($details)
+    public function referralGift($details)
     {
-        /**
-         * get last class & model
-         */
-        $previousClass = debug_backtrace()[1]['class'];
-        $previousFunction = debug_backtrace()[1]['function'];
-        /**
-         * check for available gift
-         */
+        $availableClass = $this->findAvailableGift();
+        if (!is_null($availableClass[0]['rules'])) {
+            return null;
+        }
+        $userID = $details['user_id'];
+        $promoterID = $this->getpromoterID($userID);
+        $process = $this->getProcess();
+        $class = $process['class'];
+        $callInstance = new $class();
+        return $callInstance->{$process['method']}();
+    }
+
+    public function findAvailableGift()
+    {
+        $previousClass = debug_backtrace()[2]['class'];
+        $previousFunction = debug_backtrace()[2]['function'];
         $aliveReferralRule = new AliveReferralRule;
         $availableClass = $aliveReferralRule->where(
             [
@@ -29,33 +37,29 @@ class RecordsController extends Controller
                 ['method', '=', $previousFunction],
             ])
             ->get();
-//        return $rule;
-        /**
-         * check gifts rule
-         */
-        if (!is_null($availableClass[0]['rules'])) {
-            return 0;
-        }
-        /**
-         * get user details
-         */
-        $userID = $details['user_id'];
+        return $availableClass;
+    }
+
+    public function getUserDetails($userID)
+    {
         $user = new User;
         $user = $user->where('id', '=', $userID)->get();
         $phoneNumber = $user[0]['phone_number'];
+        return $phoneNumber;
+    }
+
+    public function getpromoterID($userID)
+    {
+        $phoneNumber = $this->getUserDetails($userID);
         $preRegister = new PreRegister;
         $promoterID = $preRegister->where('phone_number', '=', $phoneNumber)->get()[0]['user_id'];
+        return $promoterID;
+    }
 
-        $forFindID = ['user_id' => $userID, 'promoter_id' => $promoterID];
+    public function getProcess()
+    {
         $processes = new Processes;
-        $process = $processes->where('id','=','27')
-            ->get();
-        $callingClass = $process[0]['class'];
-        $paramsClass = $process[0]['params'];
-        call_user_func_array("$callingClass", [$forFindID[$paramsClass[0]], $paramsClass[1]]);
-//        dd($process);
-
-
-        return ($process);
+        $process = $processes->where('id','=','1')
+            ->first()->toArray();
     }
 }

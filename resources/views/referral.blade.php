@@ -42,7 +42,7 @@
                         را با بسپار امتحان
                         کنید!
                     </p>
-                    <form action="/api/v1/custom/alive/referral/preregister" method="POST" style="">
+                    <form action="{{$config}}" method="POST" style="">
                         <script src='https://www.google.com/recaptcha/api.js'></script>
                         <div class="g-recaptcha" data-sitekey="6LfGl2wUAAAAADKX_VlI9uz7AeXMnjQRsM8lyj2T"></div>
                         <div class="form" style="margin-bottom: 10px;">
