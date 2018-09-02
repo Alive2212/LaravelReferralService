@@ -9,7 +9,7 @@ class ProcessesController extends Controller
 {
     public function referral()
     {
-        $details = ['model' => 'call_user_func_array', 'method' => 'updating', 'user_id' => '2'];
+        $details = ['model' => 'call_user_func_array', 'method' => 'updating', 'user_id' => '2' ,'user_type' => 'user-id'];
         $referralGift = new RecordsController();
         $ddd = $referralGift->referralGift($details);
         return $ddd;

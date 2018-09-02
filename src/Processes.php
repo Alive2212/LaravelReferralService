@@ -12,9 +12,7 @@ class Processes extends Model
         'method',
         'params',
     ];
-    protected $casts = [
-        'params' => 'array'
-    ];
+
 
 
 }

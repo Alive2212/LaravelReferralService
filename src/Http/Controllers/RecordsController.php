@@ -19,11 +19,14 @@ class RecordsController extends Controller
             return null;
         }
         $userID = $details['user_id'];
-        $promoterID = $this->getpromoterID($userID);
-        $process = $this->getProcess();
-        $class = $process['class'];
-        $callInstance = new $class();
-        return $callInstance->{$process['method']}();
+        $promoterID = $this->getPromoterID($userID);
+        $process = $this->getProcess($details);
+        if ($details['user_type'] == $process['params'][0]){
+            $class = $process['class'];
+            $callInstance = new $class();
+            return $callInstance->{$process['method']}($process['params'][0] , $process['params'][1]);
+        }
+
     }
 
     public function findAvailableGift()
@@ -48,7 +51,7 @@ class RecordsController extends Controller
         return $phoneNumber;
     }
 
-    public function getpromoterID($userID)
+    public function getPromoterID($userID)
     {
         $phoneNumber = $this->getUserDetails($userID);
         $preRegister = new PreRegister;
@@ -56,10 +59,12 @@ class RecordsController extends Controller
         return $promoterID;
     }
 
-    public function getProcess()
+    public function getProcess($details)
     {
         $processes = new Processes;
         $process = $processes->where('id','=','1')
-            ->first()->toArray();
+                ->first()->toArray();
+
+        return $process;
     }
 }
