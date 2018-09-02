@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\View;
 class PreRegisterController extends Controller
 {
 
-    public static function create()
+    /**
+     * @return mixed
+     */
+    public static function create(Request $request)
     {
-        $preRegister =
-            ['user_id' => input::post('user_id'),
-                'phone_number' => input::post('phone_number'),
-                'country_code' => input::post('country_code')];
-        $preRegister = PreRegister::firstOrCreate($preRegister);
+        $preRegisterData =
+            ['user_id' => $request->input('user_id'),
+                'phone_number' => $request->input('phone_number'),
+                'country_code' => $request->input('country_code')];
+        $preRegister = new PreRegister();
+        $preRegister = $preRegister->firstOrCreate($preRegisterData);
         return View::make(config('laravel-referral-service.download_view'));
     }
 }
