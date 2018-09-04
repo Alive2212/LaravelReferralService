@@ -13,11 +13,17 @@ class CreateProcessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('processes', function (Blueprint $table) {
+        Schema::create('alive_referral_processes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('class')->nullable();
             $table->string('method')->nullable();
             $table->string('params')->nullable();
+            $table->integer('rule_id')->unsigned();
+            $table->foreign('rule_id')
+                ->references('id')
+                ->on('alive_referral_rules')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -2,17 +2,13 @@
 
 namespace Alive2212\LaravelReferralService;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Processes extends Model
+class AliveReferralPreRegister extends Model
 {
     protected $fillable = [
-        'model',
-        'method',
-        'params',
+        'user_id',
+        'phone_number',
+        'country_code',
     ];
-
-
-
 }

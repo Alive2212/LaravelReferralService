@@ -13,7 +13,7 @@ class CreatePreRegistersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pre_registers', function (Blueprint $table) {
+        Schema::create('alive_referral_pre_registers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->bigInteger('phone_number');

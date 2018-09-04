@@ -23,10 +23,11 @@ Route::namespace('Alive2212\LaravelReferralService\Http\Controllers')
         Route::prefix('custom')->group(function () {
             Route::prefix('alive')->group(function () {
                 Route::prefix('referral')->group(function () {
-                    Route::get('', 'PreRegisterController@index');
-                    Route::post('preregister', 'PreRegisterController@create');
-                    Route::get('gift', 'RecordsController@referralgift');
-                    Route::get('referral', 'ProcessesController@referral');
+                    Route::get('', 'AliveReferralPreRegisterController@index');
+                    Route::post('preregister', 'AliveReferralPreRegisterController@create');
+                    Route::get('gift', 'AliveReferralRecordsController@referralgift');
+                    Route::get('add', 'AliveReferralRecordsController@addUserToDone');
+                    Route::get('referral', 'AliveReferralProcessesController@referral');
                     Route::post('key', 'AliveReferralKeyGenerate@generate');
                     Route::get('key', 'AliveReferralKeyGenerate@userPage');
                 });

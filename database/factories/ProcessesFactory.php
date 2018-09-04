@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Alive2212\LaravelReferralService\Processes::class, function (Faker $faker) {
+$factory->define(Alive2212\LaravelReferralService\AliveReferralProcesses::class, function (Faker $faker) {
     return [
         //
     ];
