@@ -11,5 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AliveReferralRecords extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'processes_id'
+    ];
 }

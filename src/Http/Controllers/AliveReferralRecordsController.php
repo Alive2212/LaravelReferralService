@@ -21,7 +21,6 @@ class AliveReferralRecordsController extends Controller
         if (!is_null($checkUser)) {
             return null;
         }
-//        dd(65);
         $availableClass = $this->findAvailableGift();
         if (!is_null($availableClass[0]['rules'])) {
             return null;
@@ -33,33 +32,10 @@ class AliveReferralRecordsController extends Controller
         }
         $processes = $this->getProcess($availableClass[0]['id']);
 
-        foreach ($processes as $process) {
-            $params = json_decode($process['params']);
-            if ($params[0] === 'user-id') {
-//                dd($process['id']);
-                $this->addUserToDone($userId,$process['id']);
-                $object = new LaravelWalletService();
-                $object->credit($userId, $params[1], 'referral gift', 'referral user', "");
-            } elseif ($params[0] === 'promoter-id') {
-                $object = new LaravelWalletService();
-                $object->credit($promoterId, $params[1], 'referral gift', 'referral promoter', "");
-            } else {
-                return;
-            }
-        }
+        $this->callFunction($processes, $userId, $promoterId);
 
     }
 
-    public function addUserToDone($userId , $processesId)
-    {
-        $user = new AliveReferralRecords();
-        $userData = [
-            'user_id' => $userId,
-            'processes_id' => $processesId
-        ];
-        $userDone = $user->firstOrCreate($userData);
-        return ;
-    }
 
     public function checkUserForGift($userId)
     {
@@ -81,7 +57,6 @@ class AliveReferralRecordsController extends Controller
                 ['method', '=', $previousFunction],
             ])
             ->get();
-//        dd($availableClass);
         return $availableClass;
     }
 
@@ -113,5 +88,43 @@ class AliveReferralRecordsController extends Controller
         $process = $processes->where('rule_id', '=', "$rule_id")
             ->get()->toArray();
         return $process;
+    }
+
+    /**
+     * @param $processes
+     * @param $userId
+     * @param $promoterId
+     */
+    public function callFunction($processes, $userId, $promoterId)
+    {
+        foreach ($processes as $process) {
+            $params = json_decode($process['params']);
+            $variableString = str_replace_first('_id', 'Id', $params[0]);
+            $callingId = ${"$variableString"};
+//            dd($id);
+            if ($callingId === $userId) {
+                $this->addUserToDone($userId, $process['id']);
+            }
+            $object = new LaravelWalletService();
+            $object->credit(
+                $callingId,
+                $params[1],
+                'referral gift',
+                'referral user',
+                ""
+            );
+        }
+    }
+
+    public function addUserToDone($userId, $processesId)
+    {
+//        dd($userId);
+        $user = new AliveReferralRecords();
+        $userData = [
+            'user_id' => $userId,
+            'processes_id' => $processesId
+        ];
+        $userDone = $user->firstOrCreate($userData);
+        return;
     }
 }

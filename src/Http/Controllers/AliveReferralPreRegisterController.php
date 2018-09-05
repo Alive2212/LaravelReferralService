@@ -13,10 +13,11 @@ class AliveReferralPreRegisterController extends Controller
 
     public static function createdd(Request $request)
     {
-        $preRegisterData =
-            ['user_id' => $request->input('user_id'),
-                'phone_number' => $request->input('phone_number'),
-                'country_code' => $request->input('country_code')];
+        $preRegisterData = [
+            'user_id' => $request->input('user_id'),
+            'phone_number' => $request->input('phone_number'),
+            'country_code' => $request->input('country_code')
+        ];
         $preRegister = new AliveReferralPreRegister();
         $preRegister = $preRegister->firstOrCreate($preRegisterData);
         return View::make(config('laravel-referral-service.download_view'));
