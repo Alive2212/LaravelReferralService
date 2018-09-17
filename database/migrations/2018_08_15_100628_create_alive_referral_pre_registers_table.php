@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePreRegistersTable extends Migration
+class CreateAliveReferralPreRegistersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,6 +29,6 @@ class CreatePreRegistersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pre_registers');
+        Schema::dropIfExists('alive_referral_pre_registers');
     }
 }
