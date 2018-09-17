@@ -44,7 +44,7 @@ class LaravelReferralServiceServiceProvider extends ServiceProvider
             ], 'laravel-referral-service.views');
 
             $this->publishes([
-                __DIR__ . '/../public/css' => base_path('public/css'),
+                __DIR__ . '/../public' => base_path('public'),
             ], 'laravel-referral-service.css');
 
         }
