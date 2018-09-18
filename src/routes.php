@@ -29,7 +29,7 @@ Route::namespace('Alive2212\LaravelReferralService\Http\Controllers')
                     Route::get('add', 'AliveReferralRecordsController@addUserToDone');
                     Route::get('referral', 'AliveReferralProcessesController@referral');
                     Route::get('key', 'AliveReferralKeyGenerate@generate');
-                    Route::get('keygenerated', 'AliveReferralKeyGenerate@userPage');
+                    Route::get('generated', 'AliveReferralKeyGenerate@userPage');
                 });
             });
         });

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 
@@ -36,7 +37,8 @@ class AliveReferralKeyGenerate extends Controller
         $countryCode = str_replace('+', '', $user['country_code']);
         $forSerialize = [$countryCode, $user['phone_number']];
         $url = [
-            'url' => (config('laravel-referral-service.url') . '?q=' . urlencode(base64_encode(serialize($forSerialize))))
+            'url' => (config('laravel-referral-service.url') . '?q=' . urlencode(base64_encode(serialize($forSerialize)))),
+            'content' => Lang::get('referral.content')
         ];
         $response = new ResponseModel();
         $response->setMessage(config('laravel-referral-service.default_message'));

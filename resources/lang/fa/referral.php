@@ -12,6 +12,6 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-    'content' => 'url generated',
+    'content' => 'آدرس  ساخته شد',
 
 ];
