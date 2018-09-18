@@ -8,5 +8,6 @@ return [
 با استفاده از لینک زیر اپلیکیشن را دانود نمایید
 https://besparapp.com/download
 ',
+    'url' => '/api/v1/custom/alive/referral/keygenerated'
 
 ];

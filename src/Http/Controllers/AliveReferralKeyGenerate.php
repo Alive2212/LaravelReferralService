@@ -35,7 +35,9 @@ class AliveReferralKeyGenerate extends Controller
         $user = User::find($userId);
         $countryCode = str_replace('+', '', $user['country_code']);
         $forSerialize = [$countryCode, $user['phone_number']];
-        $url = ['url' => (URL::current() . '?q=' . urlencode(base64_encode(serialize($forSerialize))))];
+        $url = [
+            'url' => (config('laravel-referral-service.url') . '?q=' . urlencode(base64_encode(serialize($forSerialize))))
+        ];
         $response = new ResponseModel();
         $response->setMessage(config('laravel-referral-service.default_message'));
         $response->setStatus(true);
