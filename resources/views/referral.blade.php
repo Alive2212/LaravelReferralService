@@ -50,8 +50,9 @@
                                    placeholder="شماره موبایل خود را وارد کنید… (مانند ۰۹۱۲۱۲۳۴۵۶۷۹)"
                                    pattern="^09[0-9]{9}$" id="number"
                                    title="شماره موبایل خود را به صورت صحیح وارد کنید."
-                                   name="phone_number">
+                                   name="phone_number" required>
                             <input type="hidden" value="{{$userId}}" name="user_id">
+                            <input type="hidden" value="{{$userNumber}}" name="user_number">
                             <input type="hidden" value="98" name="country_code">
                             <button name="send"><i class="mdi mdi-ml mdi-md mdi-briefcase-download"></i>دریافت بسپار و
                                 ۸۰۰۰
