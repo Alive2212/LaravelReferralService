@@ -58,7 +58,11 @@ class AliveReferralKeyGenerate extends Controller
         $phoneNumber = $deserialize[1];
         $user = new User();
         $user = $user->where('phone_number', '=', $phoneNumber)->get();
-        $detail = ['user_name' => $user[0]['name'], 'user_id' => $user[0]['id']];
+        $detail = [
+            'user_name' => $user[0]['name'],
+            'user_id' => $user[0]['id'],
+            'phone_number' => $phoneNumber
+        ];
         return $detail;
     }
 
