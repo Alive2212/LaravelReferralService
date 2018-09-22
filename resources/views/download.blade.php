@@ -27,22 +27,22 @@
                     <div class="row">
                         <div class="col--small-6 col--medium-4">
                             <div class="col-inner">
-                                <a href="https://app.adjust.com/2e4nu4?redirect=https://snapp.ir/ios/passenger/download" class="hero-image">
-                                    <img src="../../../../../img/bazar1.png" alt="دانلود نسخه iOS" title="دانلود نسخه iOS" class="download-app-image">
+                                <a href="https://cafebazaar.ir/app/com.bespar.carwash/" class="hero-image">
+                                    <img src="../../../../../img/bazar1.png" alt="دریافت از کافه بازار" title="دریافت از کافه بازار" class="download-app-image">
                                 </a>
                             </div>
                         </div>
                         <div class="col--small-6 col--medium-4">
                             <div class="col-inner">
-                                <a href="https://app.snapp.ir/?utm_source=referral-page&utm_medium=website" class="hero-image">
-                                    <img src="../../../../../img/googleplay1.png" alt="نسخه تحت وب اسنپ" title="نسخه تحت وب اسنپ" class="download-app-image">
+                                <a href="https://play.google.com/store/apps/details?id=com.bespar.carwash" class="hero-image">
+                                    <img src="../../../../../img/googleplay1.png" alt="دریافت از گوگل پلی" title="دریافت از گوگل پلی" class="download-app-image">
                                 </a>
                             </div>
                         </div>
                         <div class="col--small-6 col--medium-4">
                             <div class="col-inner">
-                                <a href="https://app.adjust.com/atc9c0?redirect=https%3A%2F%2Fcafebazaar.ir%2Fapp%2Fcab.snapp.passenger%2F%3Fl%3Dfa" class="hero-image">
-                                    <img src="../../../../../img/sibapp1.png" alt="دریافت از سیب اپ" title="دریافت از کافه بازار" class="download-app-image">
+                                <a href="https://new.sibapp.com/applications/bespar" class="hero-image">
+                                    <img src="../../../../../img/sibapp1.png" alt="دریافت از سیب اپ" title="دریافت از سیب اپ" class="download-app-image">
                                 </a>
                             </div>
                         </div>
