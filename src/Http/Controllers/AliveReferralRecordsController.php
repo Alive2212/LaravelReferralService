@@ -16,7 +16,7 @@ class AliveReferralRecordsController extends Controller
 
     public function referralGift($details)
     {
-        $userId = $details['customer_id'];
+        $userId = $this->findUserId($details);
         $checkUser = $this->checkUserForGift($userId);
         if (!is_null($checkUser)) {
             return null;
@@ -126,5 +126,22 @@ class AliveReferralRecordsController extends Controller
         ];
         $userDone = $user->firstOrCreate($userData);
         return;
+    }
+
+    /**
+     * @param $details
+     * @return mixed
+     */
+    public function findUserId($details)
+    {
+        if (isset($details['customer_id'])) {
+            $userId = $details['customer_id'];
+        } else {
+            $user = new User();
+            $user = $user->where('phone_number', '=', $details['phone_number'])->get();
+            $userId = $user[0]['id'];
+
+        }
+        return $userId;
     }
 }
