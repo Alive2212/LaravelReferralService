@@ -66,8 +66,6 @@ class AliveReferralRecordsController extends Controller
         $user = new User;
         $user = $user->where('id', '=', $userID)->get();
         $phoneNumber = $user[0]['phone_number'];
-
-//        dd($phoneNumber);
         return $phoneNumber;
     }
 
@@ -102,10 +100,7 @@ class AliveReferralRecordsController extends Controller
             $params = json_decode($process['params']);
             $variableString = str_replace_first('_id', 'Id', $params[0]);
             $callingId = ${"$variableString"};
-//            dd($id);
-            if ($callingId === $userId) {
-                $this->addUserToDone($userId, $process['id']);
-            }
+            $this->addUserToDone($userId, $process['id'],$promoterId);
             $object = new LaravelWalletService();
             $object->credit(
                 $callingId,
@@ -117,13 +112,13 @@ class AliveReferralRecordsController extends Controller
         }
     }
 
-    public function addUserToDone($userId, $processesId)
+    public function addUserToDone($userId, $processesId,$promoterId)
     {
-//        dd($userId);
         $user = new AliveReferralRecords();
         $userData = [
             'user_id' => $userId,
-            'processes_id' => $processesId
+            'processes_id' => $processesId,
+            'promoter_id' => $promoterId
         ];
         $userDone = $user->firstOrCreate($userData);
         return;
