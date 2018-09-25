@@ -21,13 +21,8 @@ class AliveReferralRecordsController extends Controller
         if (!is_null($availableClass[0]['rules'])) {
             return null;
         }
-
         $promoterId = $this->getPromoterID($userId);
         if ($promoterId == null) {
-            return null;
-        }
-        $checkUser = $this->checkUserForGift($userId, $promoterId);
-        if (!is_null($checkUser)) {
             return null;
         }
         $processes = $this->getProcess($availableClass[0]['id']);
@@ -37,11 +32,12 @@ class AliveReferralRecordsController extends Controller
     }
 
 
-    public function checkUserForGift($userId, $promoterId)
+    public function checkUserForGift($userId, $promoterId , $processId)
     {
         $user = new AliveReferralRecords();
         $checkUser = $user->where('user_id', '=', $userId)
             ->where('promoter_id', '=' , $promoterId)
+            ->where('processes_id', '=' , $processId)
             ->get()->first();
         return $checkUser;
 
@@ -100,6 +96,10 @@ class AliveReferralRecordsController extends Controller
             $params = json_decode($process['params']);
             $variableString = str_replace_first('_id', 'Id', $params[0]);
             $callingId = ${"$variableString"};
+            $checkUser = $this->checkUserForGift($userId, $promoterId, $process['id']);
+            if (!is_null($checkUser)) {
+                return null;
+            }
             $this->addUserToDone($userId, $process['id'],$promoterId);
             $object = new LaravelWalletService();
             $object->credit(
