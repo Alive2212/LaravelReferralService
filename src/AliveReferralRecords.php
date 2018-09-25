@@ -13,6 +13,7 @@ class AliveReferralRecords extends Model
 {
     protected $fillable = [
         'user_id',
-        'processes_id'
+        'processes_id',
+        'promoter_id'
     ];
 }
