@@ -16,6 +16,7 @@ class CreateAliveReferralRecordsTable extends Migration
         Schema::create('alive_referral_records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->integer('promoter_id');
             $table->integer('processes_id');
             $table->timestamps();
         });

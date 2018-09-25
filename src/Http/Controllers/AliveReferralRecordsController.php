@@ -17,10 +17,6 @@ class AliveReferralRecordsController extends Controller
     public function referralGift($details)
     {
         $userId = $this->findUserId($details);
-        $checkUser = $this->checkUserForGift($userId);
-        if (!is_null($checkUser)) {
-            return null;
-        }
         $availableClass = $this->findAvailableGift();
         if (!is_null($availableClass[0]['rules'])) {
             return null;
@@ -30,6 +26,10 @@ class AliveReferralRecordsController extends Controller
         if ($promoterId == null) {
             return null;
         }
+        $checkUser = $this->checkUserForGift($userId, $promoterId);
+        if (!is_null($checkUser)) {
+            return null;
+        }
         $processes = $this->getProcess($availableClass[0]['id']);
 
         $this->callFunction($processes, $userId, $promoterId);
@@ -37,12 +37,13 @@ class AliveReferralRecordsController extends Controller
     }
 
 
-    public function checkUserForGift($userId)
+    public function checkUserForGift($userId, $promoterId)
     {
         $user = new AliveReferralRecords();
-        $user = $user->where('user_id', '=', $userId)
+        $checkUser = $user->where('user_id', '=', $userId)
+            ->where('promoter_id', '=' , $promoterId)
             ->get()->first();
-        return $user;
+        return $checkUser;
 
     }
 
