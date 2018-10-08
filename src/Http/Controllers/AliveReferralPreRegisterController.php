@@ -22,9 +22,11 @@ class AliveReferralPreRegisterController extends Controller
         if($request->input('user_number') == $userPhoneNumber){
             return View::make(config('laravel-referral-service.download_view'));
         }
-        $userExist = $this->userExistCheck($userPhoneNumber);
-        if (!is_null($userExist)) {
-            return View::make(config('laravel-referral-service.download_view'));
+        if (!is_null($this->userExistCheck($userPhoneNumber))) {
+            return View::make(config('laravel-referral-service.download_exist_view'));
+        }
+        if (!is_null($this->preRegisterExistCheck($request))) {
+            return View::make(config('laravel-referral-service.download_exist_view'));
         }
         $this->storePreRegister($request);
         return View::make(config('laravel-referral-service.download_view'));
@@ -69,5 +71,16 @@ class AliveReferralPreRegisterController extends Controller
         $user = new User();
         $userExist = $user->where('phone_number', '=', $userPhoneNumber)->first();
         return $userExist;
+    }
+
+    /**
+     * @param Request $request
+     * @return AliveReferralPreRegister
+     */
+    public function preRegisterExistCheck(Request $request)
+    {
+        $preRegister = new AliveReferralPreRegister();
+        $preRegister = $preRegister->where('phone_number', '=', $request->input('phone_number'))->first();
+        return $preRegister;
     }
 }

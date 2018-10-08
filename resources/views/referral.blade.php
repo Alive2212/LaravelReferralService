@@ -38,13 +38,11 @@
                         شما را دعوت کرده تا اولین کارواش خود را با ۸۰۰۰ تومان اعتبار مهمان بسپار باشید.
                     </h6>
                     <p>
-                        قصد شستن ماشین خود را دارید، با اپلیکیشن بسپار به سادگی به مقصد خود می‌رسید با اولین کارواش خود
-                        را با بسپار امتحان
-                        کنید!
+                       اپلیکیشن بسپار را نصب کنید ودر زمان و ماکن دلخواه خودرو خود را تمیز کنید
                     </p>
                     <form action="{{$config}}" method="POST" style="">
                         <script src='https://www.google.com/recaptcha/api.js'></script>
-                        <div class="g-recaptcha" data-sitekey="6LfGl2wUAAAAADKX_VlI9uz7AeXMnjQRsM8lyj2T"></div>
+                        <div class="g-recaptcha" data-sitekey="6LfGl2wUAAAAADKX_VlI9uz7AeXMnjQRsM8lyj2T" required></div>
                         <div class="form" style="margin-bottom: 10px;">
                             <input type="tel"
                                    placeholder="شماره موبایل خود را وارد کنید… (مانند ۰۹۱۲۱۲۳۴۵۶۷۹)"
@@ -60,17 +58,24 @@
                             </button>
                         </div>
                     </form>
-                    <br>
-                    <div class="list">
-                    <ul >
-
-                            <li>پس از ثبت‌نام در بسپار، با همین شماره موبایل حساب کاربری خود را فعال کنید تا اعتبار ۸۰۰۰
-                                تومان برای اولین سفارش شما شارژ شود.</li>
-                            <li>شما تنها در صورتی که تا به‌حال در بسپار ثبت‌نام نکرده باشید، می‌توانید از این اعتبار ۸۰۰۰
-                                تومانی استفاده کنید.</li>
-                            <li>بسپار در حال حاضر در شهرهای تهران، کرج، اصفهان، شیراز، مشهد، قم، تبریز، اهواز، رشت، بابل،
-                                قائم شهر، ساری، بندرعباس و قزوین فعال است.</li>
-                        </ul>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
