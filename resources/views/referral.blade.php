@@ -6,15 +6,22 @@
     <title>‌ثبت‌نام در بسپار</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="../../../../../css/style.css">
-    {{--<link rel="stylesheet" href="../../../../../css/styles.css">--}}
+{{--<link rel="stylesheet" href="../../../../../css/styles.css">--}}
 
-    <!-- jQuery library -->
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
+    <!-- Latest compiled JavaScript -->
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
 
-
+    <style>
+        msg-error {
+            color: #c65848;
+        }
+        .g-recaptcha.error {
+            width: 19em;
+        }
+    </style>
 </head>
 <body>
 <main class="referral">
@@ -38,11 +45,12 @@
                         شما را دعوت کرده تا اولین کارواش خود را با ۸۰۰۰ تومان اعتبار مهمان بسپار باشید.
                     </h6>
                     <p>
-                       اپلیکیشن بسپار را نصب کنید ودر زمان و ماکن دلخواه خودرو خود را تمیز کنید
+                        اپلیکیشن بسپار را نصب کنید ودر زمان و ماکن دلخواه خودرو خود را تمیز کنید
                     </p>
                     <form action="{{$config}}" method="POST" style="">
-                        <script src='https://www.google.com/recaptcha/api.js'></script>
-                        <div class="g-recaptcha" data-sitekey="6LfGl2wUAAAAADKX_VlI9uz7AeXMnjQRsM8lyj2T" required></div>
+                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                        <span class="msg-error error"></span>
+                        <div class="g-recaptcha" id="recaptcha"  data-sitekey="6LfGl2wUAAAAADKX_VlI9uz7AeXMnjQRsM8lyj2T"></div>
                         <div class="form" style="margin-bottom: 10px;">
                             <input type="tel"
                                    placeholder="شماره موبایل خود را وارد کنید… (مانند ۰۹۱۲۱۲۳۴۵۶۷۹)"
@@ -52,36 +60,48 @@
                             <input type="hidden" value="{{$userId}}" name="user_id">
                             <input type="hidden" value="{{$userNumber}}" name="user_number">
                             <input type="hidden" value="98" name="country_code">
-                            <button name="send"><i class="mdi mdi-ml mdi-md mdi-briefcase-download"></i>دریافت بسپار و
+                            <button type="submit" id="btn-validate" name="send"><i class="mdi mdi-ml mdi-md mdi-briefcase-download"></i>دریافت بسپار و
                                 ۸۰۰۰
                                 تومان اعتبار رایگان
                             </button>
                         </div>
                     </form>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
 </main>
+<script type="text/javascript">
+    //    $( '#btn-validate' ).click(function(){
+    //        var $captcha = $( '#recaptcha' ),
+    //            response = grecaptcha.getResponse();
+    //        if (response.length === 0) {
+    //            $( '.msg-error').text( "reCAPTCHA is mandatory" );
+    //            if( !$captcha.hasClass( "error" ) ){
+    //                $captcha.addClass( "error" );
+    //            }
+    //        } else {
+    //            $( '.msg-error' ).text('');
+    //            $captcha.removeClass( "error" );
+    //            alert( 'reCAPTCHA marked' );
+    //        }
+    //    })
+    $('#btn-validate').click(function (event) {
+
+        var $captcha = $( '#recaptcha' ),
+            response = grecaptcha.getResponse();
+        if (response.length === 0) {
+            event.preventDefault();
+            $( '.msg-error').text( "لطفا گزینه من ربات نیستم را فعال کنید" );
+            if( !$captcha.hasClass( "error" ) ){
+                $captcha.addClass( "error" );
+            }
+        } else {
+
+        }
+
+    })
+</script>
 </body>
 </html>
